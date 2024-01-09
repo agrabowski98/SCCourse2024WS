@@ -1,0 +1,40 @@
+#!/bin/bash
+#SBATCH --job-name=starTest
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=10G
+#SBATCH --time=10:00:00
+#SBATCH --partition=basic
+#SBATCH --output=/scratch/course/2023w300106/grabowski/star.log
+#SBATCH --error=/scratch/course/2023w300106/grabowski/star.err
+#SBATCH --mail-type=END
+#SBATCH --mail-user=anna.grabowski@univie.ac.at
+
+module load star
+### always want to know which modules i am using before i run them
+module list
+
+cd /scratch/course/2023w300106/grabowski
+mkdir ex4.1
+cd ex4.1
+
+STAR --runThreadN 16 \
+  --genomeDir /scratch/course/2023w300106/grabowski/ncbi_dataset/data/GCF_932526225.1/jaNemVect1.1_STAR \
+  --readFilesIn /scratch/course/2023w300106/grabowski/ex4/SRR24348403/SRR24348403_1.fastq /scratch/course/2023w300106/grabowski/ex4/SRR24348403/SRR24348403_2.fastq \
+  --outSAMtype BAM SortedByCoordinate \
+  --twopassMode Basic \
+  --outSAMstrandField intronMotif \
+  --outFileNamePrefix SRR24348403
+
+### wants a BAM file to come out of it and file to be sorted by coordinate
+### outSAMstrandfield - use alignments we make today to generate genome annotations-from expression data we can infer where are the genes - produce file with all these infos that we acn then use for read counting per gene
+### if a read is split between two exons than we know from that that the intron is part of a gene
+### if we all submit at the same time will clog the server - want to run as slurm script - add all at top SBATCH
+~
+~
+~
+~
+~
+~
+~
+"Star_TEST.sh.txt" 32L, 1453C         
