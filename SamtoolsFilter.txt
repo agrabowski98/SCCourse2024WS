@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH --job-name=samtoolsFilter
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=8G
+#SBATCH --time=2:00:00
+#SBATCH --partition=basic
+#SBATCH --output=/scratch/course/2023w300106/grabowski/samtool.log
+#SBATCH --error=/scratch/course/2023w300106/grabowski/samtool.err
+#SBATCH --mail-type=END
+#SBATCH --mail-user=anna.grabowski@univie.ac.at
+
+# already done: module load samtools
+
+samtools view -b -o /scratch/course/2023w300106/BAMS/SRR24348403.f.bam \
+   -q 20 -f 0x2 -F 0x4 -@ 8 \
+   /scratch/course/2023w300106/grabowski/ex5/SRR24348403_trimAligned.sortedByCoord.out.bam
