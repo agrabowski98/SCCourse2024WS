@@ -1,0 +1,30 @@
+#!/bin/bash
+#SBATCH --job-name=starHADO01
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=10G
+#SBATCH --time=10:00:00
+#SBATCH --partition=basic
+#SBATCH --output=/scratch/course/2023w300106/grabowski/starHADO01.log
+#SBATCH --error=/scratch/course/2023w300106/grabowski/starHADO01.err
+#SBATCH --mail-type=END
+#SBATCH --mail-user=anna.grabowski@univie.ac.at
+
+module load star
+module list
+
+cd /scratch/course/2023w300106/grabowski/ex9
+
+#to see how an alignment to a transcriptome is
+#frist need to create an index:
+#STAR --runMode genomeGenerate --runThreadN 16 --genomeDir HADO01_STAR --genomeFastaFiles HADO01.fasta --genomeSAindexNbases 11
+#the genome size is smaller as previous so we use 11
+
+
+STAR --runThreadN 16 \
+  --genomeDir /scratch/course/2023w300106/grabowski/ex9/HADO01_STAR \
+  --readFilesIn /scratch/course/2023w300106/grabowski/ex4/SRR24348403/trim/SRR24348403_R1.qc.fastq /scratch/course/2023w300106/grabowski/ex4/SRR24348403/trim/SRR24348403_R2.qc.fastq
+  --outSAMtype BAM SortedByCoordinate \
+  --twopassMode Basic \
+  --outSAMstrandField intronMotif \
+  --outFileNamePrefix SRR24348403_HADO01

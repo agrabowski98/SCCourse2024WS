@@ -1,0 +1,36 @@
+#!/bin/bash
+#SBATCH --job-name=feature counts
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=4G
+#SBATCH --time=4:00:00
+#SBATCH --partition=basic
+#SBATCH --output=/scratch/course/2023w300106/grabowski/augustus.log
+#SBATCH --error=/scratch/course/2023w300106/grabowski/augustus.err
+#SBATCH --mail-type=END
+#SBATCH --mail-user=anna.grabowski@univie.ac.at
+
+### ENVIORNMENT ###
+module load subread
+
+cd /scratch/course/2023w300106/BAMS
+
+# featureCounts -p --countReadPairs -C -s 1 -Q 20\
+#  -a /scratch/course/2023w300106/grabowski/ncbi_dataset_GTF_annotation/ncbi_dataset/data/GCF_932526225.1/genomic.gtf \
+#  -o /scratch/course/2023w300106/grabowski/ex8/counts.tsv \
+#  /scratch/course/2023w300106/BAMS/*.bam 
+  
+  
+# but the GTF is faulty so we use one in his folder insead
+# feature counts requiers a line in GTF with gene ID therefore you need to run a second command
+# s 1 alligned only 2.5% so s 2
+# -T 16 means it can use 16 CPUs otherwise it will only use one and be slower
+  
+  featureCounts -p --countReadPairs -C -s 2 -Q 20 -T 16 \
+  -a /scratch/course/2023w300106/jmontenegro/ex2/annotation/tmp.gtf \
+  -o /scratch/course/2023w300106/grabowski/ex8/counts.tsv \
+  /scratch/course/2023w300106/BAMS/*.bam 
+
+# output file counts and counts.summary
+# accepts more than 1 bam if you want
+
