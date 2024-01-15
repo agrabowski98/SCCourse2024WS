@@ -1,3 +1,4 @@
+### first part copied from the console and then started writing in the script ###
 > getwd()
 [1] "/lisc/user/grabowski"
 > #this is my home diretory 
