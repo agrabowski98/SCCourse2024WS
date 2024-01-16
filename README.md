@@ -14,3 +14,5 @@ Augustus.sh -> contains command line for running augustus on chr 1
 samtoolsFilter ->
 
 featureCounts -> 
+
+SUBREAD -> 
