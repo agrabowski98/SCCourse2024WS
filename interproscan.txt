@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH --job-name=interproscan
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=10G
+#SBATCH --time=24:00:00
+#SBATCH --partition=basic
+#SBATCH --output=/scratch/course/2023w300106/grabowski/interproscan.log
+#SBATCH --error=/scratch/course/2023w300106/grabowski/interproscan.err
+#SBATCH --mail-type=END
+#SBATCH --mail-user=anna.grabowski@univie.ac.at
+
+module load interproscan
+
+interproscan.sh -b /lisc/scratch/course/2023w300106/grabowski/ex10/NEmVev.function \
+-cpu 16 -etra -f TSV,GFF3 \
+-goterms \
+-i /lisc/scratch/course/2023w300106/grabowski/ex10/proteinTransdecoder.fasta \
+-iprlookup -pa -t p 
+

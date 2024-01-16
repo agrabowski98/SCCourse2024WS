@@ -1,0 +1,52 @@
+
+
+###ENVIORNMENT###
+
+module load gffread
+module load transdecoder/5.7.1
+module load interproscan
+
+### commands ###
+
+gffread -g /lisc/scratch/course/2023w300106/grabowski/ncbi_dataset/data/GCF_932526225.1/GCF_932526225.1_jaNemVect1.1_genomic.fna.fai \
+   -w transcripts.fasta \
+   /lisc/scratch/course/2023w300106/grabowski/ncbi_dataset_GTF_annotation/ncbi_dataset/data/GCF_932526225.1/genomic.gtf
+   
+   
+# but my gtf is somehow broken so copied his gff into ex10 
+
+gffread -g /lisc/scratch/course/2023w300106/grabowski/ncbi_dataset/data/GCF_932526225.1/GCF_932526225.1_jaNemVect1.1_genomic.fna.fai \
+   -w transcripts.fasta \
+   -y proteins.fasta
+   /lisc/scratch/course/2023w300106/grabowski/ex10/genomic.gff
+
+   
+# ifyou want to find a file and you are in your own directory and want to search for it in there you can write find . -iname "*.fna" to look for anytihng with .fna in the name
+# will only oroduce a protein file if the file contains CDS information (reading frame)   
+#want to find CDS (reding frames) by finding the lonest ORF in a transcript will be the best CDS
+
+TransDecoder.LongOrfs #it will give you help like this
+
+TransDecoder.LongOrfs -t /lisc/scratch/course/2023w300106/grabowski/ex10/transcripts.fasta -S -O jaNemVec.transdecoder --complete_orfs_only
+
+TransDecoder.Predict -t /lisc/scratch/course/2023w300106/grabowski/ex10/transcripts.fasta \
+	--single_best_only \
+	-O jaNemVec.transdecoder
+	
+#two ways itcan chose the CDS - just choosing the longest ORF is the fastes way but may not be accurate so we align it against PFAM (retain pram hits) even if its not the longest ORF, if you run it in pfam or blast then it will also be added - but we are not doing it because it takes too much time 
+
+#3rd generation technologies - 20kb long sequences -limiting factor is fragment size that you can isolate - but they have a high error rate but now they have gotten better with that
+
+#with this managed to produce a preduction of proteins
+#gene name has a .P1 which will makinging the rpotein and gene match be difficult so need to get rid of this, and there is a star* at the end of the protein sequence in the pep file that we also need to get rid of
+
+sed -e 's/\.p[0-9]\+ / /' -e 's/*//' transcripts.fasta.transdecoder.pep > ../proteinTransdecoder.fasta 
+#then in the directory 1 back of where you were (into ex10) will write a new file proteinTransdecoder.fasta - check here is * and .p1 is gone, yes
+
+
+
+# now write slurm for interproscan.sh 
+
+#condaenviornment eggnoggmapper emapper.pi
+#modulel oad condaenviornmentconda indo --envs |  fgrep
+
