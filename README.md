@@ -3,6 +3,8 @@ My scipt from the SC Course 23/24WS
 
 what does each script do?
 
+indexing with star ->
+
 STAR ->
 
 trimmomatic ->
