@@ -54,7 +54,7 @@ derive gene models from those files to make gtf or gff, combine with allignemnts
       --genes=/scratch/course/2023w300106/Nv2_wnt4_pcna_fluo.gtf \
       --nthreads=16
 
-cellrangercount -> call ranger matrix output that has readcounts per cell - then continue with alison to find geneclusters and identiy genes that are over or underexpressed ect.
+(CelltrangerCount.txt) cellrangercount -> call ranger matrix output that has readcounts per cell - then continue with alison to find geneclusters and identiy genes that are over or underexpressed ect.
     use cellranger to demuliplex the sequencing adapters and barcodes etc. cellranger in its pipeline will already know where all this is and do it automatically
     Now we use cellranger for single cell (also soloSTAR exhists for this)
 
