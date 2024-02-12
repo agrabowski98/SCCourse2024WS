@@ -1,0 +1,32 @@
+#!/bin/bash
+#SBATCH --job-name=augustus_chr1
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=16G
+#SBATCH --time=48:00:00
+#SBATCH --partition=basic
+#SBATCH --output=/scratch/course/2023w300106/grabowski/augustus.log
+#SBATCH --error=/scratch/course/2023w300106/grabowski/augustus.err
+#SBATCH --mail-type=END
+#SBATCH --mail-user=anna.grabowski@univie.ac.at
+
+### enviornment ###
+
+module load conda
+module list
+
+conda activate augustus-3.5.0
+augustus --help
+
+
+### Execution ### 
+cd /scratch/course/2023w300106/grabowski
+mkdir ex7
+cd ex7
+
+augustus --strand=both --genemodel=complete --gff3=on --outfile=nemVec_augustus.gff \
+ --species=nematostella_vectensis \
+   /scratch/course/2023w300106/grabowski/ncbi_dataset/data/GCF_932526225.1/chr1.fasta 
+
+# they want to know the species as they want to run it with a statistical model that is already adjusted to that species
+
