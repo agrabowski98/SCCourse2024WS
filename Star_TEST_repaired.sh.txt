@@ -30,11 +30,4 @@ STAR --runThreadN 16 \
 ### outSAMstrandfield - use alignments we make today to generate genome annotations-from expression data we can infer where are the genes - produce file with all these infos that we acn then use for read counting per gene
 ### if a read is split between two exons than we know from that that the intron is part of a gene
 ### if we all submit at the same time will clog the server - want to run as slurm script - add all at top SBATCH
-~
-~
-~
-~
-~
-~
-~
-"Star_TEST.sh.txt" 32L, 1453C         
+  
