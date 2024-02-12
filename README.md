@@ -6,7 +6,7 @@ what does each script do?
 (not uploaded) indexing with star -> generating a index to make the allignment faster. it will look for certrain characteristics of the genome and then allign those to the short sequences. All mappers and alligners have their own indexer
     i.e. "STAR --runMode genomeGenerate --runThreadN 8 --genomeDir jaNemVect1.1_STAR --genomeFastaFiles GCF_932526225.1_jaNemVect1.1_genomic.fna --genomeSAindexNbases 13"
 
-(Star_TEST.sh.txt) STAR -> Run the mapping job: align reads to a reference genome or transcriptome. STAR is a gap aligner. - results in a BAM file
+(Star_TEST_repaired.sh.txt) STAR -> Run the mapping job: align reads to a reference genome or transcriptome. STAR is a gap aligner. - results in a BAM file
    BAM: the Bam file in SAM format - Binary SAM file - like a zipped version of the SAM format 
       - Can use samtool to look at the zipped version - as unzipped it is a gigantic file 
 
