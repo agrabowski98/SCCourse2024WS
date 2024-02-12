@@ -29,7 +29,7 @@ Visualize the alignment using IGV
 
 
 
-(not here) featureCounts -> using the annotation of our reference genome, summarize/count all the reads that fit to one gene. 
+(featureCounts.txt) featureCounts -> (not submitted as slurm) Using the annotation of our reference genome, summarize/count all the reads that fit to one gene. 
     featureCounts -p --countReadPairs -C -s 2 -Q 20 -T 16 \
       -a /scratch/course/2023w300106/jmontenegro/ex2/annotation/tmp.gtf \ ##our GTF was faulty so used one from here
       -o /scratch/course/2023w300106/grabowski/ex8/counts.tsv \
